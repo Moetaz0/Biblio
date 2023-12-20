@@ -1,0 +1,60 @@
+<button (click)="openModal()" type="button" class="flex items-center rounded-full bg-gradient-to-r from-purple-500 to-black px-4 py-2 border-2 border-white shadow-md transition duration-300 hover:shadow-xl mr-4 text-white">
+    <i class="bi bi-plus-circle mr-2"></i> Add Publisher
+
+</button>
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Autheur</h4>
+
+                <button type="button" class="btn btn-default" aria- label="Close" (click)="closeModal()"><span aria-
+                        hidden="true">&times;</span></button>
+
+            </div>
+            <div class="modal-body">
+                <template *ngTemplateOutlet="formBook"></template>
+            </div>
+            
+
+
+        </div>
+    </div>
+</div>
+<!-- Form -->
+<ng-template #formBook>
+    <div *ngIf="showForm" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-filter backdrop-blur-md">
+        <!-- Center the modal content -->
+        <div class="bg-white p-8 rounded-md shadow-md w-96  h-4/5 overflow-y-auto">
+          <form (ngSubmit)="ajoutpub()">
+            <div class="flex justify-end">
+                <button type="button" class="text-gray-500 ml-2" (click)="closeModal()">
+                  <i class="bi bi-x-circle"></i>
+                </button>
+              </div>
+            <div class="mb-3">
+              <label class="text-gray-400"  for="">Name</label><br>
+              <input required="true" type="text" class="w-full px-4 py-2 border rounded-md focus:outline-none" id="Publisher" name="Publisher" placeholder="Publisher" [(ngModel)]="pub.maisonedit">
+            </div>
+      
+            <div class="mb-3">
+              <label class="text-gray-400"  for="">Email</label><br>
+              <input required="true" type="text" class="w-full px-4 py-2 border rounded-md focus:outline-none" id="Email" name="Email" placeholder="Email" [(ngModel)]="pub.email">
+            </div>
+      
+            <div class="mb-3">
+              <label class="text-gray-400"  for="">Web site</label><br>
+              <input required type="text" class="w-full px-4 py-2 border rounded-md focus:outline-none" id="siteweb" name="siteweb" placeholder="Web site Link" [(ngModel)]="pub.siteweb">
+            </div>
+      
+           
+                
+              <div class="flex justify-center">
+                <button  type="submit" class="bg-gradient-to-r from-purple-500 to-black text-white px-4 py-2 rounded-md">Save</button>
+              </div>
+            
+          </form>
+        </div>
+      </div>
+</ng-template>

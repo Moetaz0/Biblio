@@ -1,0 +1,94 @@
+<button (click)="openModal()" type="button" class="flex items-center rounded-full bg-gradient-to-r from-red-500 to-black px-4 py-2 border-2 border-white shadow-md transition duration-300 hover:shadow-xl mr-4 text-white">
+    <i class="bi bi-plus-circle mr-2"></i> Add Book
+
+</button>
+<!-- Modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ajout Produit</h4>
+
+                <button type="button" class="btn btn-default" aria- label="Close" (click)="closeModal()"><span aria-
+                        hidden="true">&times;</span></button>
+
+            </div>
+            <div class="modal-body">
+                <template *ngTemplateOutlet="formBook"></template>
+            </div>
+            
+
+
+        </div>
+    </div>
+</div>
+<!-- Form -->
+<ng-template #formBook>
+    <div *ngIf="showForm" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-filter backdrop-blur-md">
+        <!-- Center the modal content -->
+        <div class="bg-white p-8 rounded-md shadow-md w-96  h-full overflow-y-auto">
+          <form (ngSubmit)="ajoutBook()">
+            <div class="flex justify-end">
+                <button type="button" class="text-gray-500 ml-2" (click)="closeModal()">
+                  <i class="bi bi-x-circle"></i>
+                </button>
+              </div>
+            <div class="mb-3">
+              <input required="true" type="text" class="w-full px-4 py-2 border rounded-md focus:outline-none" id="isbn" name="isbn" placeholder="ISBN" [(ngModel)]="book.isbn">
+            </div>
+      
+            <div class="mb-3">
+              <input required="true" type="text" class="w-full px-4 py-2 border rounded-md focus:outline-none" id="titre" name="titre" placeholder="Title" [(ngModel)]="book.titre">
+            </div>
+      
+            <div class="mb-3">
+              <input required type="number" class="w-full px-4 py-2 border rounded-md focus:outline-none" id="annedition" name="annedition" placeholder="Publishing Year" [(ngModel)]="book.annedition">
+            </div>
+      
+            <div class="mb-3">
+              <input required type="text" class="w-full px-4 py-2 border rounded-md focus:outline-none" id="qtestock" name="qtestock" placeholder="Price" [(ngModel)]="book.prix">
+            </div>
+      
+            <div class="mb-3">
+              <input required type="text" class="w-full px-4 py-2 border rounded-md focus:outline-none" id="marque" name="marque" placeholder="Stock Quantity" [(ngModel)]="book.qtestock">
+            </div>
+      
+            <div>
+                <file-pond #myPond
+                [options]="pondOptions"
+                >
+                </file-pond>
+                </div>
+            <div class="mb-3">
+                <label for="SpecialitiesID" class="block text-sm font-medium text-gray-700">Speciality</label>
+                <select multiple id="SpecialitiesID" name="Specialities" class="w-full px-4 py-2 border rounded-md focus:outline-none" [(ngModel)]="book.specialite">
+                  <option *ngFor="let sd of Specialities" [ngValue]="sd._id">
+                    {{sd.nomspecialite}}
+                  </option>
+                </select>
+              </div>
+              
+                <div class="mb-3">
+                    <label for="Publisher" class="block text-sm font-medium text-gray-700">Publisher</label>
+                <select id="publisher" name="publisher" class="w-full px-4 py-2 border rounded-md focus:outline-none" [(ngModel)]="book.maised._id">
+                  <option *ngFor="let p of publisher" [ngValue]="p._id">
+                    {{p.maisonedit}}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="auth" class="block text-sm font-medium text-gray-700">Authors</label>
+                <select multiple id="auth" name="auth" class="w-full px-4 py-2 border rounded-md focus:outline-none" [(ngModel)]="book.auteurs">
+                    <option *ngFor="let a of auth" [ngValue]="a._id">
+                      {{a.nomauteur}}
+                    </option>
+                  </select>
+                </div>
+              <div class="flex justify-center">
+                <button  type="submit" class="bg-gradient-to-r from-red-500 to-black text-white px-4 py-2 rounded-md">Save</button>
+              </div>
+            
+          </form>
+        </div>
+      </div>
+</ng-template>

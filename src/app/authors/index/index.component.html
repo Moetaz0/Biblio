@@ -1,0 +1,79 @@
+<!-- Add these links to the head section of your HTML file -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+<div class="flex flex-col dark:bg-gray-800 dark:text-white">
+    
+    <div class="w-full flex bg-white dark:bg-gray-700 p-4 justify-between items-center sticky top-0 z-10 shadow-md">
+        <h5 class="font-bold text-4xl text-green-500 mr-auto">Book <span class="text-black">Library</span></h5>
+
+        <div class="flex items-center space-x-4 ml-auto">
+            <a (click)="navigateToBooks()" class="text-lg text-black-500 hover:text-red-700 hover:border-b-2 border-red-700 transition">Books</a>
+            <a  (click)="navigateToAuth()"  class="text-lg text-black-500 hover:text-green-700 hover:border-b-2 border-green-700 transition">Authors</a>
+            <a  (click)="navigateToSpec()"class="text-lg text-black-500 hover:text-yellow-700 hover:border-b-2 border-yellow-700 transition">Specialty</a>
+            <a (click)="navigateToPublisher()" class="text-lg text-black-500 hover:text-purple-700 hover:border-b-2 border-purple-700 transition">Publisher</a>
+    
+            
+            <button (click)="logout()" type="button" class="flex items-center rounded-full bg-gradient-to-r from-green-500 to-black px-4 py-2 border-2 border-white shadow-md transition duration-300 hover:shadow-xl mr-4 text-white">
+                Log Out
+                <i class="bi bi-box-arrow-right ml-2"></i> <!-- Assuming the icon for logout is 'box-arrow-right' -->
+            </button>
+                
+                
+            
+        </div>
+    </div>
+    
+    <div class="overflow-x-auto mt-8">
+        <div class="flex justify-between items-center p-4">
+            <!-- Add Book Button -->
+            <app-create></app-create>
+    
+            <!-- Search Bar -->
+            <div class="relative">
+                <input matInput (keyup)="filter($event)" type="text" placeholder="Search..." class="border border-gray-300 rounded-md p-2 focus:outline-none">
+                <i class="bi bi-search absolute top-2 right-3 text-gray-400"></i>
+            </div>
+        </div>
+        <table class="min-w-full bg-white dark:bg-gray-900 border-collapse border border-gray-300 dark:border-gray-700 shadow-md dark:shadow-md rounded-md">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="px-4 py-2 border border-gray-300 dark:border-gray-700 text-left text-xs uppercase tracking-wider">Name</th>
+                    <th class="px-4 py-2 border border-gray-300 dark:border-gray-700 text-left text-xs uppercase tracking-wider">Email</th>
+                    <th class="px-4 py-2 border border-gray-300 dark:border-gray-700 text-left text-xs uppercase tracking-wider">Phone</th>
+                    <th class="px-4 py-2 border border-gray-300 dark:border-gray-700 text-left text-xs uppercase tracking-wider" width="250px">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let auth of auth" class="transition-all hover:bg-gray-50">
+                    <td class="px-4 py-2 border border-gray-300 dark:border-gray-700 whitespace-nowrap text-sm">{{ auth.nomauteur }}</td>
+                    <td class="px-4 py-2 border border-gray-300 dark:border-gray-700 whitespace-nowrap text-sm">{{ auth.email }}</td>
+                    <td class="px-4 py-2 border border-gray-300 dark:border-gray-700 whitespace-nowrap text-sm">{{ auth.numtel }}</td>
+                    <td class="px-4 py-2 border border-gray-300 dark:border-gray-700 whitespace-nowrap space-x-2">
+                        <app-view [AuthID]="auth._id"></app-view>
+                        <app-edit [AuthID]="auth._id"></app-edit>
+                        <button type="button" (click)="deleteAutheurs(auth._id)" class="btn btn-default inline-flex items-center text-xs">
+                            <i class="bi bi-trash-fill mr-1"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+<!-- Add this script after including Lightbox2 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const lightbox = new Lightbox();
+
+        // Initialize Lightbox on image click
+        document.querySelectorAll('.lightbox-trigger').forEach(function (element) {
+            element.addEventListener('click', function (e) {
+                e.preventDefault();
+                lightbox.showElement(element);
+            });
+        });
+    });
+</script>

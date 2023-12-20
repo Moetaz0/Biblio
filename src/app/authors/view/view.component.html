@@ -1,0 +1,57 @@
+<!-- Button trigger modal -->
+<a class="btn btn-default inline-flex items-center text-xs" (click)="openModal()">
+    <i class="bi bi-eye-fill mr-1"></i> 
+  </a>
+  
+  <!-- Modal -->
+  <div [ngStyle]="{'display': display}" class="modal top-1/2   " tabindex="-1" role="dialog">
+    <div class="bg-white w-full mx-2 p-4 w-4/5 rounded-md max-w-xs overflow-auto ">
+      <div class="text-right">
+        <button type="button" class="text-gray-500" (click)="closeModal()">
+          <i class="bi bi-x-circle"></i>
+        </button>
+      </div>
+      <div class="text-center">
+        <h4 class="text-xl font-bold mb-4">Autheur details</h4>
+      </div>
+      <div class="mb-4">
+        <template *ngTemplateOutlet="formBook"></template>
+      </div>
+      <div class="flex justify-center">
+        <button (click)="closeModal()" type="submit" class="bg-gradient-to-r from-red-500 to-black text-white px-4 py-2 rounded-md">Close</button>
+      </div>
+    </div>
+  </div>
+  
+<!-- Form -->
+<ng-template #formBook>
+    <div  class="fixed  top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-filter backdrop-blur-md overflow-auto mt-4 mb-4  ">
+        <!-- Center the modal content -->
+        <div class="bg-white p-8 rounded-md shadow-md w-1.5/5 h-4/5  mt-4 mb-4 md:flex">
+          <form aria-readonly="true">
+            <div class="flex justify-end">
+                <button type="button" class="text-gray-500 ml-2" (click)="closeModal()">
+                  <i class="bi bi-x-circle"></i>
+                </button>
+              </div>
+            <div class="mb-3">
+                <label class="text-gray-400"  for="">Name</label><br>
+              <input required="true" type="text" class="cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none" id="nomauteur" name="nomauteur" placeholder="Name" [(ngModel)]="Auth.nomauteur"readonly>
+            </div>
+      
+            <div class="mb-3">
+                <label class="text-gray-400"  for="">Email</label><br>
+              <input required="true" type="text" class="cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none" id="email" name="email" placeholder="email" [(ngModel)]="Auth.email"readonly>
+            </div>
+      
+            <div class="mb-3">
+                <label class="text-gray-400" for="">Phone number</label><br>
+              <input required type="number" class="cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none" id="numtel" name="numtel" placeholder="Phone number" [(ngModel)]="Auth.numtel" readonly>
+            </div>
+      
+           
+          </form>
+        </div>
+      </div>
+</ng-template>
+  
